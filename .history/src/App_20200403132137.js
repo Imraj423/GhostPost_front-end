@@ -36,7 +36,7 @@ class App extends Component {
         }
       });
   };
-
+  
   handleChange = event => {
     this.setState({ input: event.target.value });
   };
@@ -52,7 +52,7 @@ class App extends Component {
           path="/boasts"
           render={() => (
             <PostList
-              // deletePost={this.deletePost}
+              deletePost={this.deletePost}
               ghostpost={this.state.ghostpost.filter(
                 posts => posts.is_Boast === true
               )}
@@ -65,7 +65,8 @@ class App extends Component {
           path="/roasts"
           render={() => (
             <PostList
-              // deletePost={this.deletePost}
+              deletePost={this.deletePost}
+              secret_id={this.secret_id}
               ghostpost={this.state.ghostpost.filter(
                 posts => posts.is_Boast === false
               )}
@@ -78,7 +79,8 @@ class App extends Component {
           path="/upvotes"
           render={() => (
             <PostList
-              // deletePost={this.deletePost}
+              deletePost={this.deletePost}
+              secret_id={this.secret_id}
               ghostpost={this.state.ghostpost.sort((x, y) => {
                 return y.total_count - x.total_count;
               })}
@@ -91,7 +93,8 @@ class App extends Component {
           path="/downvotes"
           render={() => (
             <PostList
-              // deletePost={this.deletePost}
+              deletePost={this.deletePost}
+              secret_id={this.secret_id}
               ghostpost={this.state.ghostpost.sort((x, y) => {
                 return x.total_count - y.total_count;
               })}

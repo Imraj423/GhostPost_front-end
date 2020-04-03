@@ -20,8 +20,7 @@ export default class PostList extends Component {
                     time={messages.time}
                     total_count={messages.total_count}
                     key={index}
-                    // deletePost={this.props.deletePost}
-                    secret_id={this.props.secret_id}
+                    deletePost={this.props.deletePost}
                     />
                 )}
                 </Card.Body>

@@ -46,7 +46,7 @@ export default class Post extends Component {
             &nbsp;
             <Button onClick={this.handleDownvote}>Downvote</Button>
             &nbsp;
-            {/* <Button onClick={this.props.deletePost.bind(this, this.props.secret_id)}>Delete</Button> */}
+            <Button onClick={this.props.deletePost}>Delete</Button>
             <br />
             <p>
               <b>{this.props.total_count}</b>

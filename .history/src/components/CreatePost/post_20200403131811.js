@@ -2,9 +2,12 @@ import React, { Component } from "react";
 import { Button, Card, CardGroup } from "react-bootstrap";
 
 export default class Post extends Component {
-  state = {
+  constructor(props) {
+    super(props);
+  this.state = {
     id: "",
   };
+  this.props.deletePost.bind(this, this.props.secret_id);
   handleUpvote = event => {
     let payload = this.props.id;
     fetch("http://localhost:8000/api/ghostpost/" + payload + "/upvote")
@@ -46,7 +49,7 @@ export default class Post extends Component {
             &nbsp;
             <Button onClick={this.handleDownvote}>Downvote</Button>
             &nbsp;
-            {/* <Button onClick={this.props.deletePost.bind(this, this.props.secret_id)}>Delete</Button> */}
+            <Button onClick={this.props.deletePost.bind(this, this.props.secret_id)}>Delete</Button>
             <br />
             <p>
               <b>{this.props.total_count}</b>

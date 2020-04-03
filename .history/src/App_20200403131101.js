@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import PostList from "./components/PostView/postlist";
 import Form from "./components/Form/form";
 import Main from "./components/Home/main";
-
 import { Route } from "react-router-dom";
 
 class App extends Component {
@@ -21,22 +20,6 @@ class App extends Component {
       });
   }
 
-  deletePost = secret_id => {
-    fetch("http://localhost:8000/api/ghostpost/" + secret_id + "/remove", {
-      method: "delete"
-    })
-      .then(res => res.json())
-      .then(id => {
-        for (let i = 0; i < this.state.ghostpost.length; ++i) {
-          if (this.state.ghostpost[i].id === id[0])
-            this.setState([
-              ...this.state.ghostpost.slice(0, i),
-              ...this.state.ghostpost.slice(i + 1)
-            ]);
-        }
-      });
-  };
-
   handleChange = event => {
     this.setState({ input: event.target.value });
   };
@@ -52,7 +35,7 @@ class App extends Component {
           path="/boasts"
           render={() => (
             <PostList
-              // deletePost={this.deletePost}
+              deletePost={this.deletePost}
               ghostpost={this.state.ghostpost.filter(
                 posts => posts.is_Boast === true
               )}
@@ -65,7 +48,7 @@ class App extends Component {
           path="/roasts"
           render={() => (
             <PostList
-              // deletePost={this.deletePost}
+              deletePost={this.deletePost}
               ghostpost={this.state.ghostpost.filter(
                 posts => posts.is_Boast === false
               )}
@@ -78,7 +61,7 @@ class App extends Component {
           path="/upvotes"
           render={() => (
             <PostList
-              // deletePost={this.deletePost}
+              deletePost={this.deletePost}
               ghostpost={this.state.ghostpost.sort((x, y) => {
                 return y.total_count - x.total_count;
               })}
@@ -91,7 +74,7 @@ class App extends Component {
           path="/downvotes"
           render={() => (
             <PostList
-              // deletePost={this.deletePost}
+              deletePost={this.deletePost}
               ghostpost={this.state.ghostpost.sort((x, y) => {
                 return x.total_count - y.total_count;
               })}

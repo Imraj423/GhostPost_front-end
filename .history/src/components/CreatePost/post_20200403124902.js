@@ -26,7 +26,21 @@ export default class Post extends Component {
       event.preventDefault()
   };
 
-  
+  deletePost = secret_id => {
+    fetch("http://localhost:8000/api/ghostpost/" + secret_id + "/remove", {
+        method: 'delete'
+    })
+    .then(res => res.json())
+    .then(id => {
+      for(let i = 0; i < posts.length; ++i){
+          if (posts[i].id === id[0])
+              setPosts([
+                  ...posts.slice(0, i),
+                  ...posts.slice(i + 1)
+              ])
+        }
+    })
+}
 
   render() {
     return (
@@ -46,7 +60,7 @@ export default class Post extends Component {
             &nbsp;
             <Button onClick={this.handleDownvote}>Downvote</Button>
             &nbsp;
-            {/* <Button onClick={this.props.deletePost.bind(this, this.props.secret_id)}>Delete</Button> */}
+            <Button onClick={this.deletePost}>Delete</Button>
             <br />
             <p>
               <b>{this.props.total_count}</b>

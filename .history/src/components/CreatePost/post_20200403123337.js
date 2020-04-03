@@ -26,7 +26,21 @@ export default class Post extends Component {
       event.preventDefault()
   };
 
-  
+  deletePost = secret_id => {
+    fetch(`${BASE_URL}/${secret_id}/remove`, {
+        method: 'delete'
+    })
+    .then(res => res.json())
+    .then(id => {
+      for(let i = 0; i < posts.length; ++i){
+          if (posts[i].id === id[0])
+              setPosts([
+                  ...posts.slice(0, i),
+                  ...posts.slice(i + 1)
+              ])
+        }
+    })
+}
 
   render() {
     return (
@@ -42,11 +56,10 @@ export default class Post extends Component {
                   .split(".")[0]
               }
             </p>
+            
             <Button onClick={this.handleUpvote}>Upvote</Button>
             &nbsp;
             <Button onClick={this.handleDownvote}>Downvote</Button>
-            &nbsp;
-            {/* <Button onClick={this.props.deletePost.bind(this, this.props.secret_id)}>Delete</Button> */}
             <br />
             <p>
               <b>{this.props.total_count}</b>
