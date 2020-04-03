@@ -1,0 +1,14 @@
+// .box {
+//     background: #2B2B2B;
+//     padding: 32px;
+//     border: 1px solid black;
+// }
+
+.box {
+    border: solid 2px white;
+    padding: 40px;
+    height: calc(100vh - 80px);
+    width: 20vw;
+    min-height: 100px;
+    background: salmon;
+}
