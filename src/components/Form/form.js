@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { Container, Form } from "react-bootstrap";
 import Navi from "../NavBar/nav";
+import { Redirect } from "react-router-dom";
 
 export default function PostMessage() {
+  const [home, setHome] = useState(false);
   const [message, setMessage] = useState("");
   const [is_Boast, setIs_Boast] = useState(false);
 
@@ -22,11 +24,14 @@ export default function PostMessage() {
       })
     })
       .then(res => res.json())
-      .then(result => console.log(result));
+      .then(result => {
+        setHome(true)
+        console.log(result)});
+      
     e.preventDefault();
   };
 
-  return (
+  return home ? <Redirect to = "/"/> : (
     <Container>
       <Navi />
       <Form onSubmit={SubmitPost}>
