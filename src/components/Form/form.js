@@ -9,7 +9,7 @@ export default function PostMessage() {
   const [is_Boast, setIs_Boast] = useState(false);
 
   const handleMessageChange = e => setMessage(e.currentTarget.value);
-  const handleis_BoastChange = e => setIs_Boast(!is_Boast);
+  const handleis_BoastChange = e => setIs_Boast(!e.is_Boast);
 
   const SubmitPost = e => {
     fetch("http://127.0.0.1:8000/api/ghostpost/", {

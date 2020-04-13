@@ -35,18 +35,11 @@ export default class Post extends Component {
           <CardGroup>
             <p>
               {this.props.message} <br />{" "}
-              {
-                this.props.time
-                  .split("T")
-                  .join(" ")
-                  .split(".")[0]
-              }
             </p>
             <Button onClick={this.handleUpvote}>Upvote</Button>
             &nbsp;
             <Button onClick={this.handleDownvote}>Downvote</Button>
             &nbsp;
-            {/* <Button onClick={this.props.deletePost.bind(this, this.props.secret_id)}>Delete</Button> */}
             <br />
             <p>
               <b>{this.props.total_count}</b>
