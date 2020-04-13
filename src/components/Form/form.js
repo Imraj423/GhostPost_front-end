@@ -3,6 +3,7 @@ import { Container, Form } from "react-bootstrap";
 import Navi from "../NavBar/nav";
 import { Redirect } from "react-router-dom";
 
+// help from jt to make use of react hooks
 export default function PostMessage() {
   const [home, setHome] = useState(false);
   const [message, setMessage] = useState("");

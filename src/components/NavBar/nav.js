@@ -10,7 +10,7 @@ export default function Navi() {
         </Button>
         &nbsp;
         <Button>
-          <a href="/form">Post a Boast or a Roast</a>
+          <a href="/create">Post a Boast or a Roast</a>
         </Button>
         &nbsp;
         <Button>

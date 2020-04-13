@@ -1,110 +1,88 @@
-import React, {
-  Component
-} from "react";
+import React, { Component } from "react";
 import PostList from "./components/PostView/postlist";
 import Form from "./components/Form/form";
 import Main from "./components/Home/main";
 
-import {
-  Route
-} from "react-router-dom";
+import { Route } from "react-router-dom";
 
 class App extends Component {
   state = {
     ghostpost: [],
-    input: "",
-    boast: ""
+    message: "",
+    boast: "",
   };
   componentDidMount() {
     fetch("http://localhost:8000/api/ghostpost/")
-      .then(res => {
+      .then((res) => {
         return res.json();
       })
-      .then(data => {
+      .then((data) => {
         this.setState({
-          ghostpost: data
+          ghostpost: data,
         });
       });
   }
 
-
-
-  handleChange = event => {
+  handleChange = (event) => {
     this.setState({
-      input: event.target.value
+      message: event.target.value,
     });
   };
 
   render() {
-    return ( <
-      React.Fragment >
-      <
-      Route exact path = "/"
-      render = {
-        () => < Main / >
-      }
-      /> <
-      Route exact path = "/form"
-      render = {
-        () => < Form / >
-      }
-      />
+    return (
+      <React.Fragment>
+        <Route exact path="/" render={() => <Main />} />
+        <Route exact path="/create" render={() => <Form />} />
 
-      <
-      Route exact path = "/boasts"
-      render = {
-        () => ( <
-          PostList ghostpost = {
-            this.state.ghostpost.filter(
-              posts => posts.is_Boast === true
-            )
-          }
-          />
-        )
-      }
-      />
+        <Route
+          exact
+          path="/boasts"
+          render={() => (
+            <PostList
+              ghostpost={this.state.ghostpost.filter(
+                (posts) => posts.is_Boast === true
+              )}
+            />
+          )}
+        />
 
-      <
-      Route exact path = "/roasts"
-      render = {
-        () => ( <
-          PostList ghostpost = {
-            this.state.ghostpost.filter(
-              posts => posts.is_Boast === false
-            )
-          }
-          />
-        )
-      }
-      />
+        <Route
+          exact
+          path="/roasts"
+          render={() => (
+            <PostList
+              ghostpost={this.state.ghostpost.filter(
+                (posts) => posts.is_Boast === false
+              )}
+            />
+          )}
+        />
 
-      <
-      Route exact path = "/upvotes"
-      render = {
-        () => ( <
-          PostList ghostpost = {
-            this.state.ghostpost.sort((x, y) => {
-              return y.total_count - x.total_count;
-            })
-          }
-          />
-        )
-      }
-      />
+        <Route
+          exact
+          path="/upvotes"
+          render={() => (
+            <PostList
+              ghostpost={this.state.ghostpost.sort((x, y) => {
+                return y.total_count - x.total_count;
+              })}
+            />
+          )}
+        />
 
-      <
-      Route exact path = "/downvotes"
-      render = {
-        () => ( <
-          PostList ghostpost = {
-            this.state.ghostpost.sort((x, y) => {
-              return x.total_count - y.total_count;
-            })
-          }
-          />
-        )
-      }
-      /> </React.Fragment>
+        <Route
+          exact
+          path="/downvotes"
+          render={() => (
+            <PostList
+              ghostpost={this.state.ghostpost.sort((x, y) => {
+                return x.total_count - y.total_count;
+              })}
+            />
+          )}
+        />
+      </React.Fragment>
     );
   }
 }
